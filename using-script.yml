@@ -1,0 +1,23 @@
+# To demo this pipeline:
+# 1. Deploy the existing solution to Azure
+# 2. Create a variable group and reference the created Key Vault
+# 3. Update the `group` in this pipeline file and commit changes
+# 4. Create a new pipeline in Azure DevOps and select this file, then run it
+
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: to-be-deleted
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo This task will output the secret but it will be masked:
+    echo $(my-super-secret)
+  displayName: 'Output secrets (but masked)'
